@@ -1,0 +1,97 @@
+﻿<html>
+<head>
+<title>Hebrew Conversion</title>
+<meta name="keywords" content="hebrew,unicode,conversion,converter,michigan-claremont,transliteration">
+<meta name="description" content="Converts the Michigan-Claremont transliteration to Unicode.">
+</head>
+
+<script language="JavaScript">
+
+var translitchars = new Array( ")", "b", "g", "d", "h", "w", "z", "x", "+", "y", "k", "l",
+                               "m", "n", "s", "(", "p", "c", "q", "r", "#", "t",
+                               "K", "M", "N", "P", "C" );
+
+var unicodechars = new Array( 1488, 1489, 1490, 1491, 1492, 1493, 1494, 1495, 1496, 1497, 1499, 1500,
+                              1502, 1504, 1505, 1506, 1508, 1510, 1511, 1512, 1513, 1514,
+                              1498, 1501, 1503, 1507, 1509 );
+
+function convertHebrew()
+{
+  src = document.conversionForm.transliteration.value;
+  srclength = src.length;
+  alphabetlength = translitchars.length;
+  dest = "";
+
+  for ( srci = 0; srci < srclength; ++srci )
+  {
+    for ( alphabeti = 0; alphabeti < alphabetlength; ++alphabeti )
+    {
+      if ( translitchars[ alphabeti ] == src.charAt( srci ) )
+      {
+        dest += "&#" + unicodechars[ alphabeti ] + ";";
+        break;
+      }
+    }
+
+    if ( alphabeti >= alphabetlength )
+    {
+      dest += src.charAt( srci );
+    }
+  }
+
+  document.conversionForm.unicode.value = dest;
+
+  if ( document.all )
+  {
+    document.all.displayHebrew.innerHTML = dest;
+  }
+  else if ( document.getElementById )
+  {
+    document.getElementById('displayHebrew').innerHTML = dest;
+  }
+}
+
+</script>
+
+<body>
+<center>
+  <p><a href="http://www.earlyjewishwritings.com"><img src="images/logo.gif" width="250" height="50" border="0" alt="Hebrew Conversion on Early Jewish Writings"></a></p>
+</center>
+<center>
+  <h1>Hebrew Conversion</h1>
+</center>
+
+<form name="conversionForm">
+
+<p>Enter the Michigan-Claremont <a href="http://rosetta.reltech.org/TC/TC-translit.html">transliteration</a> here (with capitals (*) for final forms):</p>
+
+<p><textarea name="transliteration" cols=40 rows=5 onKeyPress="javascript:if( (event.keyCode) == 13) {convertHebrew();};"></textarea></p>
+
+<p><input type=button value="Convert" onClick="convertHebrew()"></p>
+
+<p id="displayHebrew">The Hebrew you entered will be shown here.</p>
+
+<p><textarea name="unicode" cols=40 rows=5></textarea></p>
+
+<table border="1">
+<tr>
+<td>alef</td> <td>bet</td> <td>gimel</td> <td>dalet</td> <td>he</td> <td>waw</td> <td>zayin</td> <td>het</td> <td>tet</td> <td>yod</td> <td>kaf*</td> 
+<td>lamed</td> <td>mem*</td> <td>nun*</td> <td>samek</td> <td>ayin</td> <td>pe*</td> <td>tsade*</td> <td>qof</td> <td>resh</td> <td>sin</td> <td>shin</td> 
+<td>no point s</td> <td>taw</td> 
+</tr>
+
+
+<tr>
+<td>)</td> <td>b</td> <td>g</td> <td>d</td> <td>h</td> <td>w</td> <td>z</td> <td>x</td> <td>+</td> <td>y</td> <td>k</td> <td>l</td> <td>m</td> <td>n</td> 
+<td>s</td> <td>(</td> <td>p</td> <td>c</td> <td>q</td> <td>r</td> <td>&</td> <td>$</td> <td>#</td> <td>t</td> 
+</tr>
+</table>
+
+
+</p>
+
+</form>
+
+<!--#include virtual="/footer.txt" -->
+</body>
+</html>

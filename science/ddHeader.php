@@ -1,0 +1,3 @@
+<?
+echo ':: Deus Diapente';
+?>
